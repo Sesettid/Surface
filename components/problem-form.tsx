@@ -57,7 +57,7 @@ export function ProblemForm() {
         body: JSON.stringify({ problem_id: data.id, ...data })
       });
 
-      if (!response.ok) {
+      if (!response.ok && response.status !== 202) {
         throw new Error("The problem was saved, but AI analysis could not be completed.");
       }
 

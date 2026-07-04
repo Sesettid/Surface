@@ -28,7 +28,7 @@ export async function POST(request: Request) {
   const problem = requestSchema.parse(body);
 
   if (!process.env.OPENAI_API_KEY) {
-    return NextResponse.json({ error: "Missing OPENAI_API_KEY" }, { status: 500 });
+    return NextResponse.json({ skipped: true, reason: "Missing OPENAI_API_KEY" }, { status: 202 });
   }
 
   const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });

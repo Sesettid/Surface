@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 20% 98%;
+    --foreground: 210 24% 16%;
+    --card: 0 0% 100%;
+    --card-foreground: 210 24% 16%;
+    --primary: 170 72% 28%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 214 32% 91%;
+    --secondary-foreground: 212 26% 22%;
+    --muted: 210 20% 94%;
+    --muted-foreground: 213 12% 42%;
+    --accent: 34 92% 55%;
+    --accent-foreground: 215 30% 15%;
+    --border: 214 23% 84%;
+    --input: 214 23% 84%;
+    --ring: 170 72% 28%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+}
+
+.pulse-grid {
+  background-image:
+    linear-gradient(rgba(16, 122, 111, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(16, 122, 111, 0.08) 1px, transparent 1px);
+  background-size: 32px 32px;
+}

@@ -1,4 +1,4 @@
-import { createServerSupabaseClient } from "@/lib/supabase/server";
+import { createServerSupabaseReadClient } from "@/lib/supabase/server";
 import { demoProblems } from "@/lib/demo-data";
 import type { AiAnalysis, Problem, ProblemTheme, ProblemWithAnalysis } from "@/lib/types";
 
@@ -8,11 +8,11 @@ type ProblemRow = Problem & {
 };
 
 export async function getProblems(): Promise<ProblemWithAnalysis[]> {
-  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
     return demoProblems;
   }
 
-  const supabase = createServerSupabaseClient();
+  const supabase = createServerSupabaseReadClient();
   const { data, error } = await supabase
     .from("problems")
     .select(

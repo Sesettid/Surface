@@ -31,6 +31,17 @@ export async function POST(request: Request) {
     ? await analyzeWithOpenAi(problem)
     : analyzeProblemLocally(problem);
 
+  if (!process.env.SUPABASE_SERVICE_ROLE_KEY) {
+    return NextResponse.json(
+      {
+        ...analysis,
+        saved: false,
+        warning: "Missing SUPABASE_SERVICE_ROLE_KEY. Problem was saved, but analysis was not persisted."
+      },
+      { status: 202 }
+    );
+  }
+
   const supabase = createServerSupabaseClient();
   const { error } = await supabase.from("ai_analysis").upsert(
     {

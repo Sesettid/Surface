@@ -7,6 +7,7 @@ create table if not exists public.problems (
   affected_group text not null,
   current_impact text not null,
   desired_outcome text not null,
+  contact_email text,
   created_at timestamptz not null default now()
 );
 

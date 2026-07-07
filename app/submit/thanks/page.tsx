@@ -11,8 +11,8 @@ export default function ThanksPage() {
           <CheckCircle2 className="mx-auto h-12 w-12 text-primary" />
           <h1 className="mt-5 text-3xl font-semibold tracking-normal">Thank you for the signal.</h1>
           <p className="mx-auto mt-3 max-w-xl text-muted-foreground">
-            Your problem was submitted and queued for AI analysis. Shared patterns become visible as
-            more people add and upvote problems.
+            Your problem was submitted and analyzed. If you added an email, we may reach out for
+            more context if the problem becomes a top opportunity.
           </p>
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
             <Button asChild>

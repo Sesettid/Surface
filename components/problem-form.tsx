@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { Loader2, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { createBrowserSupabaseClient } from "@/lib/supabase/client";
@@ -33,6 +34,7 @@ export function ProblemForm() {
     const description = String(formData.get("description") ?? "").trim();
     const impact = String(formData.get("impact") ?? "").trim();
     const desiredOutcome = String(formData.get("desired_outcome") ?? "").trim();
+    const contactEmail = String(formData.get("contact_email") ?? "").trim();
     const title = description.length > 84 ? `${description.slice(0, 81)}...` : description;
 
     try {
@@ -44,7 +46,8 @@ export function ProblemForm() {
           description,
           affected_group: impact,
           current_impact: impact,
-          desired_outcome: desiredOutcome
+          desired_outcome: desiredOutcome,
+          contact_email: contactEmail || null
         })
         .select("id,title,description,affected_group,current_impact,desired_outcome")
         .single();
@@ -111,6 +114,22 @@ export function ProblemForm() {
               className="min-h-36"
               placeholder="Describe what would become faster, easier, clearer, safer, or more effective."
             />
+          </div>
+
+          <div className="rounded-lg border bg-muted/40 p-4">
+            <div className="space-y-2">
+              <Label htmlFor="contact_email">Optional follow-up email</Label>
+              <Input
+                id="contact_email"
+                name="contact_email"
+                type="email"
+                placeholder="name@example.com"
+              />
+              <p className="text-sm text-muted-foreground">
+                Add your email if you are open to being contacted for more context, especially if
+                this problem becomes one of the top opportunities.
+              </p>
+            </div>
           </div>
 
           {error ? (

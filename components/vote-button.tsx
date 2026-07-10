@@ -14,6 +14,17 @@ export function VoteButton({ problemId, initialVotes }: { problemId: string; ini
     process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
   );
   const isDemoProblem = problemId.startsWith("00000000-");
+  
+  function getDeviceId() {
+  let id = localStorage.getItem("surface_device_id");
+
+  if (!id) {
+    id = crypto.randomUUID();
+    localStorage.setItem("surface_device_id", id);
+  }
+
+  return id;
+}
 
   async function vote() {
     if (!isConfigured || isDemoProblem) {
